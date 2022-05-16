@@ -42,15 +42,17 @@ describe("MerkleTree", function () {
           });
         merkleTree = await MerkleTree.deploy();
         await merkleTree.deployed();
+        console.log("deployed");
     });
 
     it("Insert two new leaves and verify the first leaf in an inclusion proof", async function () {
+        console.log(merkleTree.hashes(9));
         await merkleTree.insertLeaf(1);
         await merkleTree.insertLeaf(2);
-
+        console.log("insertended");
         const node9 = (await merkleTree.hashes(9)).toString();
         const node13 = (await merkleTree.hashes(13)).toString();
-
+        console.log(node9, node13);
         const Input = {
             "leaf": "1",
             "path_elements": ["2", node9, node13],
